@@ -1,36 +1,8 @@
-"use client"
-
-import { useChat } from "@ai-sdk/react"
-
-import { Chat } from "@/components/ui/chat"
-
-export default function ChatWithSuggestions() {
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    append,
-    status,
-    stop,
-  } = useChat()
-
-  const isLoading = status === "submitted" || status === "streaming"
-
-  return (
-    <Chat
-      messages={messages}
-      input={input}
-      handleInputChange={handleInputChange}
-      handleSubmit={handleSubmit}
-      isGenerating={isLoading}
-      stop={stop}
-      append={append}
-      suggestions={[
-        "Generate a tasty vegan lasagna recipe for 3 people.",
-        "Generate a list of 5 questions for a frontend job interview.",
-        "Who won the 2022 FIFA World Cup?",
-      ]}
-    />
-  )
+export default function Home() {
+    return (
+        <div
+            className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+            <h1 className="text-3xl font-bold">ToHome</h1>
+        </div>
+    );
 }
