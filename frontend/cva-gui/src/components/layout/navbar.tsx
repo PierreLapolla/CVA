@@ -16,11 +16,11 @@ const routeList: RouteProps[] = [
         label: "Home",
     },
     {
-        href: "/",
+        href: "/chat",
         label: "Chat",
     },
     {
-        href: "/",
+        href: "/contact",
         label: "Contact",
     },
 ];
@@ -61,7 +61,7 @@ export const Navbar = () => {
                     <Button asChild size="sm" variant="ghost" aria-label="View on GitHub" className="p-0 w-9 h-9 flex items-center justify-center">
                         <Link
                             aria-label="View on GitHub"
-                            href="https://github.com/nobruf/shadcn-landing-page.git"
+                            href="https://github.com/PierreLapolla/CVA.git"
                             target="_blank"
                         >
                             <Github className="size-5"/>
