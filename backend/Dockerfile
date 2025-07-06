@@ -15,4 +15,6 @@ USER appuser
 
 RUN uv sync
 
-ENTRYPOINT ["uv", "run", "-m", "src.app"]
+EXPOSE 8000
+
+ENTRYPOINT ["uv", "run", "fastapi", "run", "src/app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,7 +1,4 @@
-# Python App Template
-
-This project provide a template for Python projects, including a basic structure and configuration files to help you get started quickly.
-It aims to enforce best practices and provide a consistent development experience.
+# Backend
 
 ## Installation
 
@@ -9,19 +6,20 @@ It aims to enforce best practices and provide a consistent development experienc
 
 - [UV](https://docs.astral.sh/uv/) package manager
 
-### Clone the repository
-
-```bash
-  git clone https://github.com/PierreLapolla/python_template.git
-  cd python_template
-```
-
 ## Running the project
 
 To run the project locally, run the following command:
 
+Development mode with hot-reloading:
+
 ```bash
-  uv run -m src.app
+  uv run fastapi dev src/app
+```
+
+Production mode:
+
+```bash
+  uv run fastapi run src/app
 ```
 
 ## Docker Support
@@ -29,8 +27,8 @@ To run the project locally, run the following command:
 You can also run the application in a Docker container:
 
 ```bash
-  docker build -t python-app .
-  docker run -it python-app
+  docker build -t sensor_hub_api .
+  docker run -it sensor_hub_api
 ```
 
 The Docker image is optimized for this project and uses UV package manager for dependency management.
