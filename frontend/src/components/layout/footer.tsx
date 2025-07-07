@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const Footer = () => {
     return (
-        <footer className="w-full border-t border-secondary bg-card py-6 mt-12">
+        <footer className="w-full border-t border-secondary bg-card py-6">
             <div className="container mx-auto text-center text-sm text-muted-foreground">
                 &copy; 2025 Designed and developed by
                 <Link
