@@ -24,7 +24,7 @@ export default function ContactPage() {
           <Card className="w-full flex flex-col items-center justify-center p-10">
             <CardHeader className="w-full flex flex-col items-center">
               <CardTitle>
-                <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">Get in Touch</h1>
+                <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">Get in touch</h1>
               </CardTitle>
             </CardHeader>
             <CardContent className="w-full flex flex-col items-center">
