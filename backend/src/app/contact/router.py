@@ -1,8 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 
+from app.contact.dependencies import get_email_service
 from app.contact.schemas import ContactForm
-from utils.logger import log
+from app.contact.service import EmailService
 
 contact_router = APIRouter()
 
@@ -10,11 +11,7 @@ contact_router = APIRouter()
 @contact_router.post("/")
 async def send_email(
         contact_form: ContactForm,
+        email_service: EmailService = Depends(get_email_service)
 ) -> JSONResponse:
-    log.info(
-        f"Received contact form submission: {contact_form.email}, {contact_form.subject}, {contact_form.message}"
-    )
-    return JSONResponse(
-        status_code=201,
-        content={"message": "Contact form submitted successfully."},
-    )
+    response = email_service.send_contact_email(contact_form)
+    return response

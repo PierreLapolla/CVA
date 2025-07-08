@@ -1,5 +1,7 @@
+"use client"
+
 export default function ChatPage() {
-    return (
+  return (
         <div>
             <div className="container mx-auto px-4 py-16">
                 <h1 className="text-4xl font-bold tracking-tight mb-4">Chat Page</h1>
@@ -10,3 +12,4 @@ export default function ChatPage() {
         </div>
     )
 }
+

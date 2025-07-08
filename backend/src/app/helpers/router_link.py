@@ -11,4 +11,4 @@ async def root():
 
 def include_routers(app: FastAPI) -> None:
     app.include_router(root_router)
-    app.include_router(contact_router, prefix="/contact", tags=["contact"])
+    # app.include_router(contact_router, prefix="/contact", tags=["contact"])
