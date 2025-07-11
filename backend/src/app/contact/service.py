@@ -17,7 +17,34 @@ class EmailService:
 
     @try_except(exceptions=ClientError, error_callable=send_contact_email_error)
     def send_contact_email(self, contact_form: ContactForm) -> JSONResponse:
-        # TODO: Implement email sending logic using AWS SES
+        self.client.send_email(
+            Source=self.recipient_email,
+            Destination={
+                'ToAddresses': [
+                    self.recipient_email,
+                ],
+            },
+            Message={
+                'Subject': {
+                    'Data': f"New Contact Form Submission: {contact_form.subject}",
+                    'Charset': 'UTF-8'
+                },
+                'Body': {
+                    'Text': {
+                        'Data': (
+                            f"You received a new message from the contact form:\n\n"
+                            f"From: {contact_form.email}\n"
+                            f"Subject: {contact_form.subject}\n\n"
+                            f"Message:\n{contact_form.message}"
+                        ),
+                        'Charset': 'UTF-8'
+                    }
+                }
+            },
+            ReplyToAddresses=[
+                contact_form.email
+            ]
+        )
         return JSONResponse(
             status_code=200,
             content={"message": "Successfully sent contact email."}

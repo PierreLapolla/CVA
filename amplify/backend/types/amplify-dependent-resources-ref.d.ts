@@ -1,1 +1,8 @@
-export type AmplifyDependentResourcesAttributes = {}
+export type AmplifyDependentResourcesAttributes = {
+  "custom": {
+    "ecsBackend": {
+      "ClusterName": "string",
+      "EcrRepoUri": "string"
+    }
+  }
+}

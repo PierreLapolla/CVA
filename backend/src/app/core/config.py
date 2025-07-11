@@ -8,6 +8,8 @@ class BaseAppSettings(BaseSettings):
     app_version: str = "0.1.0"
 
     aws_region: str = "eu-west-3"
+    AWS_ACCESS_KEY_ID: str = "" # KEEP EMPTY, set in .env file
+    AWS_SECRET_ACCESS_KEY: str = "" # KEEP EMPTY, set in .env file
 
     recipient_email: str = "pro@pierrelapolla.com"
 
