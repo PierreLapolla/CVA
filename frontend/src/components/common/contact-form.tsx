@@ -25,8 +25,8 @@ import {
 
 const contactFormSchema = z.object({
   email: z.string().email(),
-  subject: z.string().min(3),
-  message: z.string().min(10),
+  subject: z.string().nonempty(),
+  message: z.string().nonempty(),
 });
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
@@ -44,7 +44,7 @@ export const ContactForm = () => {
     setResult(null);
     setLoading(true);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("http://127.0.0.1:8000/contact/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

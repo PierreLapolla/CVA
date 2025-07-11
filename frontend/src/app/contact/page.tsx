@@ -4,8 +4,8 @@ import {useState} from "react";
 import {Button} from "@/components/ui/button";
 import {Check, Copy, Github, Linkedin, Mail} from "lucide-react";
 import {ContactInfoCard} from "@/components/common/contact-info-card";
-import {SocialLink} from "@/components/common/social-link";
 import {ContactForm} from "@/components/common/contact-form";
+import {SocialLink} from "@/components/common/social-link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function ContactPage() {
@@ -24,7 +24,7 @@ export default function ContactPage() {
           <Card className="w-full flex flex-col items-center justify-center p-10">
             <CardHeader className="w-full flex flex-col items-center">
               <CardTitle>
-                <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">Get in Touch</h1>
+                <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">Get in touch</h1>
               </CardTitle>
             </CardHeader>
             <CardContent className="w-full flex flex-col items-center">
@@ -38,11 +38,12 @@ export default function ContactPage() {
 
       {/* Main content */}
       <div className="container mx-auto px-4 pb-16">
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Left column: stacked cards */}
+          <div className="flex-1 flex flex-col gap-6">
             {/* Email card */}
             <ContactInfoCard
-              title="Contact information"
+              title="Contact me at"
               contentClassName="relative"
             >
               <div className="flex items-center">
@@ -53,11 +54,15 @@ export default function ContactPage() {
                 />
                 <Button
                   size="icon"
-                  variant="outline"
+                  variant="ghost"
                   onClick={copyToClipboard}
                   aria-label="Copy email to clipboard"
-                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                  className="w-9 h-9 flex items-center justify-center hover:bg-accent focus-visible:bg-accent group absolute right-4 top-1/2 -translate-y-1/2"
                 >
+                  {/* Label affiché à gauche au survol */}
+                  <span className="absolute right-full mr-2 px-2 py-1 rounded bg-muted text-xs text-muted-foreground opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity pointer-events-none">
+                    Copy
+                  </span>
                   {copied ? (
                     <Check className="w-4 h-4 text-green-500"/>
                   ) : (
@@ -66,7 +71,6 @@ export default function ContactPage() {
                 </Button>
               </div>
             </ContactInfoCard>
-
             {/* Social media card */}
             <ContactInfoCard
               title="Find me on social media"
@@ -89,8 +93,10 @@ export default function ContactPage() {
             </ContactInfoCard>
           </div>
 
-          {/* Contact form */}
-          <ContactForm/>
+          {/* Right column: contact form */}
+          <div className="flex-1">
+            <ContactForm/>
+          </div>
         </div>
       </div>
     </div>

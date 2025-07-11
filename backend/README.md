@@ -27,8 +27,8 @@ Production mode:
 You can also run the application in a Docker container:
 
 ```bash
-  docker build -t sensor_hub_api .
-  docker run -it sensor_hub_api
+  docker build -t backend .
+  docker run -it backend
 ```
 
 The Docker image is optimized for this project and uses UV package manager for dependency management.

@@ -2,15 +2,24 @@ from app.core.config import settings
 from app.helpers.exception_link import add_exception_handlers
 from app.helpers.router_link import include_routers
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def create_app() -> FastAPI:
-
     api = FastAPI(
         title=settings.app_name,
         description=settings.app_description,
         version=settings.app_version,
     )
+
+    api.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:3000"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
     add_exception_handlers(api)
     include_routers(api)
 
