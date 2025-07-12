@@ -1,17 +1,21 @@
 version: 1
 runtime-versions:
   nodejs: 18
-  python: 3.13
+  python: 3.10
 
 backend:
   phases:
     preBuild:
       commands:
         - python3 -m pip install uv
-        - python3 -m uv sync
+        - |
+          cd backend
+          python3 -m uv sync
+          cd -
     build:
       commands:
         - amplifyPush --simple
+
 frontend:
   phases:
     preBuild:
@@ -20,6 +24,7 @@ frontend:
     build:
       commands:
         - npm run build
+
   artifacts:
     baseDirectory: out
     files:
