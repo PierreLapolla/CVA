@@ -1,35 +1,37 @@
 version: 1
-runtime-versions:
-  nodejs: 18
-  python: 3.10
+applications:
+  - backend:
+      phases:
+        preBuild:
+          commands:
+            - rm -rf amplify/backend/function/fastapilambda/src/*
+            - mkdir -p amplify/backend/function/fastapilambda/src
+            - cp -R backend/* amplify/backend/function/fastapilambda/src/
+        build:
+          commands:
+            - cd amplify/backend/function/fastapilambda/src
+            - uv sync
+      artifacts:
+        baseDirectory: amplify/backend/function/fastapilambda
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - backend/.venv/**/*
 
-backend:
-  phases:
-    preBuild:
-      commands:
-        - python3 -m pip install uv
-        - |
-          cd backend
-          python3 -m uv sync
-          cd -
-    build:
-      commands:
-        - amplifyPush --simple
-
-frontend:
-  phases:
-    preBuild:
-      commands:
-        - cd frontend
-        - npm ci
-    build:
-      commands:
-        - npm run build
-
-  artifacts:
-    baseDirectory: frontend/out
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - frontend/node_modules/**/*
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - cd frontend
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: frontend/out
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - frontend/node_modules/**/*
