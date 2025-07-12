@@ -4,25 +4,8 @@ backend:
   phases:
     build:
       commands:
-        - '# 1) provision the CFN (incl. ECR & ECS stack)'
+        - echo "=== Backend: build & deploy ==="
         - amplifyPush --simple
-        - |
-          # 2) log in to ECR
-          aws ecr get-login-password --region $AWS_REGION \
-            | docker login --username AWS --password-stdin \
-              $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-        - |
-          # 3) build & push your FastAPI image
-          docker build -t $ECR_REPO_NAME:latest backend
-        - |
-          docker tag \
-            $ECR_REPO_NAME:latest \
-            $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:latest
-        - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:latest
-        - aws ecs update-service \
-          --cluster ${AWS_CLOUDFORMATION_STACK_NAME%-*}-cluster \
-          --service ${AWS_CLOUDFORMATION_STACK_NAME%-*}-service \
-          --desired-count 1
 
 frontend:
   phases:
