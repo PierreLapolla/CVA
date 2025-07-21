@@ -1,1 +1,9 @@
-{ "test": "event" }
+   {
+     "httpMethod": "GET",
+     "path": "/",
+     "headers": {
+       "Content-Type": "application/json"
+     },
+     "multiValueQueryStringParameters": {},
+     "body": ""
+   }
