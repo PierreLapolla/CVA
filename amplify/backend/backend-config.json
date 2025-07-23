@@ -1,44 +1,5 @@
 {
-  "api": {
-    "fastapibackend": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "fastapilambda"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
+  "api": {},
   "custom": {},
-  "function": {
-    "fastapilambda": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_fastapilambda_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "fastapilambda"
-        }
-      ]
-    },
-    "AMPLIFY_function_fastapilambda_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "fastapilambda"
-        }
-      ]
-    }
-  }
+  "function": {}
 }

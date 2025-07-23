@@ -1,21 +1,19 @@
-import logging
-from typing import Callable, Any, Optional, TypeVar, Union, Tuple, Type
-
 from utils.logger import log, LOG_LEVEL
+from typing import Callable, Any, Optional, TypeVar
+import logging
 
 
 def try_except(
     _func=None,
     *,
-    exceptions: Union[Type[Exception], Tuple[Type[Exception], ...]] = Exception,
     finally_callable: Optional[Callable[[], Any]] = None,
     error_callable: Optional[Callable[[], Any]] = None,
 ) -> Callable:
     """
     Decorator to catch exceptions in a function.
+    Optionally execute a callable in the finally block or when an error is caught.
 
     :param _func: The function to decorate.
-    :param exceptions: Exception or tuple of exceptions to catch. Default is Exception (catches all exceptions).
     :param finally_callable: Optional parameterless callable to execute in finally.
     :param error_callable: Optional parameterless callable to execute when an error is caught.
     :return: The wrapper function.
@@ -26,19 +24,21 @@ def try_except(
         def wrapper(*args, **kwargs) -> Optional[R]:
             try:
                 return func(*args, **kwargs)
-
-            except exceptions as e:
+            except Exception as e:
                 message = f"{func.__name__}: {e.__class__.__name__}: {e}"
                 log.error(message, exc_info=LOG_LEVEL <= logging.DEBUG)
                 if error_callable:
-                    log.debug(f"calling {error_callable.__name__} from {func.__name__}")
-                    return error_callable()
+                    error_callable()
+                    log.debug(
+                        f"{error_callable.__name__} executed from {func.__name__}"
+                    )
                 return None
-
             finally:
                 if finally_callable:
                     finally_callable()
-                    log.debug(f"{finally_callable.__name__} executed from {func.__name__}")
+                    log.debug(
+                        f"{finally_callable.__name__} executed from {func.__name__}"
+                    )
 
         return wrapper
 
@@ -59,9 +59,8 @@ if __name__ == "__main__":
     def handle_error():
         log.info("Error handled.")
 
-    @try_except(exceptions=(ZeroDivisionError, ValueError), error_callable=handle_error, finally_callable=cleanup)
+    @try_except(error_callable=handle_error, finally_callable=cleanup)
     def divide(a, b):
         return a / b
 
-    return_value = divide(1, 0)
-    log.debug(f"Return value: {return_value}")
+    divide(1, 0)
