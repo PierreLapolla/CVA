@@ -10,17 +10,6 @@
       "StackName": "amplify-cva-main-8d9a5",
       "StackId": "arn:aws:cloudformation:eu-west-3:515966529661:stack/amplify-cva-main-8d9a5/d6b22560-5b17-11f0-adbb-0e545f2fff51",
       "AmplifyAppId": "d1osjn0oyzjaq7"
-    },
-    "categories": {
-      "function": {
-        "fastapilambda": {
-          "deploymentBucketName": "amplify-cva-main-8d9a5-deployment",
-          "s3Key": "amplify-builds/fastapilambda-68715763335a36523248-build.zip"
-        }
-      },
-      "api": {
-        "fastapibackend": {}
-      }
     }
   }
 }

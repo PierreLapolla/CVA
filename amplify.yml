@@ -1,25 +1,6 @@
 version: 1
 runtime-versions:
   nodejs: 18
-  python: 3.10
-
-backend:
-  phases:
-    preBuild:
-      commands:
-        - python3 -m pip install uv
-        - |
-          cd backend
-          python3 -m uv sync
-          cd -
-        - |
-          rm -rf amplify/backend/function/fastapilambda/src/app
-          mkdir -p amplify/backend/function/fastapilambda/src
-          cp -R backend/app amplify/backend/function/fastapilambda/src/app
-    build:
-      commands:
-        - amplifyPush --simple
-
 
 frontend:
   phases:
